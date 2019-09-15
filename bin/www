@@ -7,6 +7,7 @@
 var app = require('../app');
 var debug = require('debug')('chatapp:server');
 var http = require('http');
+var socket = require('socket.io');
 
 /**
  * Get port from environment and store in Express.
@@ -20,12 +21,31 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+var io = socket(server);
+
+
+io.on('connection', (socket) => {
+  console.log('new connection established');
+  socket.emit('welcome');
+  socket.on('sendMessage', (message) => {
+    io.emit('newMessage', message);
+  })
+  socket.on('sendLocation', (location)=>{
+    socket.broadcast.emit('receiveLocation', `https://google.com/maps?q=${location.latitude},${location.longitude}`);
+  })
+  socket.broadcast.emit('newMessage', "A new user has joined"); 
+  socket.on('disconnect', () => {
+    io.emit('newMessage', 'A user has left');
+  })
+})
 
 /**
  * Listen on provided port, on all network interfaces.
  */
 
-server.listen(port);
+server.listen(port, () => {
+  console.log(`server is up on port ${port}` );
+});
 server.on('error', onError);
 server.on('listening', onListening);
 

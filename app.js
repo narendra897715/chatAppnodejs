@@ -6,7 +6,7 @@ const bodyParser = require('body-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var loginRouter = require('./routes/login');
-var usersRouter = require('./routes/users');
+var usersRouter = require('./routes/index');
 var registerRouter = require('./routes/register');
 var app = express();
 

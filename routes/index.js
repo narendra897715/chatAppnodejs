@@ -5,7 +5,7 @@ var router = express.Router();
 /* GET home page. */
 router.get('/getEmployees', function(req, res, next) {
  
-     new sql.Request(poolPromise).query('select * from Employees', function (err, recordset) {
+     new sql.Request(poolPromise).query('select * from Users', function (err, recordset) {
             
             if (err) console.log(err)
 

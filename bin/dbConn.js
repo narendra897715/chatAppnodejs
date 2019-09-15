@@ -21,16 +21,27 @@ var sql = require("mssql");
 //   }
 //   };
 
-    // config for your database
-    var config = {
-      user: 'newLogin',
-      password: 'Keyboard@123456',
-      server: 'RPILMASQL002',
-      database: 'chatAppdb',
+    // config for your Realpage database
+    // var config = {
+    //   user: 'newLogin',
+    //   password: 'Keyboard@123456',
+    //   server: 'RPILMASQL002',
+    //   database: 'chatAppdb',
+    //   options: {
+    //     encrypt: false // Use this if you're on Windows Azure
+    // }
+    // }; 
+
+    // config for aws rds database
+     var config = {
+      user: 'chatAppDB',
+      password: 'software1234567',
+      server: 'chatapprd2.cbeg0nfpwumj.ap-south-1.rds.amazonaws.com',
+      database: 'chatAppDB',
       options: {
         encrypt: false // Use this if you're on Windows Azure
     }
-    }; 
+    };
 
 const poolPromise = new sql.ConnectionPool(config, function (err) {
 
