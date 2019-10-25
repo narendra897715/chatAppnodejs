@@ -1,19 +1,10 @@
+
 var express = require('express');
 var router = express.Router();
- const {sql, poolPromise} = require('../bin/dbConn'); 
-// const  = require('../bin/dbConn');
-/* GET home page. */
-router.get('/getEmployees', function(req, res, next) {
- 
-     new sql.Request(poolPromise).query('select * from Users', function (err, recordset) {
-            
-            if (err) console.log(err)
 
-            // send records as a response
-            res.send(recordset.recordset);
-            
-        });
-   
+/* GET users listing. */
+router.get('/', function(req, res, next) {
+  res.send('respond with a resource');
 });
 
 module.exports = router;

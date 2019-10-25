@@ -6,7 +6,8 @@ const bodyParser = require('body-parser');
 var logger = require('morgan');
 var cors = require('cors');
 var loginRouter = require('./routes/login');
-var usersRouter = require('./routes/index');
+var usersRouter = require('./routes/users');
+var indexRouter = require('./routes/index');
 var registerRouter = require('./routes/register');
 var app = express();
 
@@ -23,7 +24,8 @@ app.use(bodyParser.json({ limit: '50mb' }));
 app.use(bodyParser.urlencoded({ limit: '50mb', extended: true }));
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
-app.use(express.static(path.join(__dirname, 'public')));
+// app.use(express.static(path.join(__dirname, 'public')));
+app.use(express.static(path.join(__dirname, 'profilePictures')));
 // app.use(function (req, res, next) {
 //   res.header("Access-Control-Allow-Origin", "*");
 //   res.header("Access-Control-Allow-Methods", "GET,HEAD,POST,PUT");
@@ -35,7 +37,7 @@ app.use(cors({
   }));
 // app.use('/', indexRouter);
 app.use('/users', usersRouter);
-app.use('/', registerRouter)
+app.use('/', indexRouter)
 app.use('/login', loginRouter)
 
 // catch 404 and forward to error handler

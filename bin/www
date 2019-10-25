@@ -33,10 +33,10 @@ io.on('connection', (socket) => {
   socket.on('sendLocation', (location)=>{
     socket.broadcast.emit('receiveLocation', `https://google.com/maps?q=${location.latitude},${location.longitude}`);
   })
-  socket.broadcast.emit('newMessage', "A new user has joined"); 
-  socket.on('disconnect', () => {
-    io.emit('newMessage', 'A user has left');
-  })
+  // socket.broadcast.emit('newMessage', "A new user has joined"); 
+  // socket.on('disconnect', () => {
+  //   io.emit('newMessage', 'A user has left');
+  // })
 })
 
 /**
