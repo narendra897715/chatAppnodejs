@@ -8,7 +8,7 @@ var app = require('../app');
 var debug = require('debug')('chatapp:server');
 var http = require('http');
 var socket = require('socket.io');
-
+var {addUsers, getUser} = require('../utils/usersData'); 
 /**
  * Get port from environment and store in Express.
  */
@@ -27,10 +27,19 @@ var io = socket(server);
 io.on('connection', (socket) => {
   console.log('new connection established');
   socket.emit('welcome');
+  socket.on('join',(userData)=>{
+    const addeduser = addUsers({id : socket.id, userEmail : userData.emailId});
+    socket.join(addeduser.userEmail);
+  })
   socket.on('sendMessage', (message) => {
-    io.emit('newMessage', message);
+    console.log(message);
+    const user = getUser(message.sendTo);
+    console.log(user);
+    socket.emit('newMessage', message);
+    io.sockets.in(user.userEmail).emit('newMessage', message);
   })
   socket.on('sendLocation', (location)=>{
+
     socket.broadcast.emit('receiveLocation', `https://google.com/maps?q=${location.latitude},${location.longitude}`);
   })
   // socket.broadcast.emit('newMessage', "A new user has joined"); 
