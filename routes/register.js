@@ -6,8 +6,7 @@ router.post('/addUsers', function(req, res, next) {
 
     var data = req.body;
     data.password = bcrypt.hashSync(data.password, 10);
-    // res.send("successfully addedd");
-    console.log(data);
+
     const request = new sql.Request(poolPromise)
           .input('firstName', sql.NVarChar, data.firstName)
           .input('lastName', sql.NVarChar, data.lastName)

@@ -32,9 +32,9 @@ io.on('connection', (socket) => {
     socket.join(addeduser.userEmail);
   })
   socket.on('sendMessage', (message) => {
-    console.log(message);
+
     const user = getUser(message.sendTo);
-    console.log(user);
+
     socket.emit('newMessage', message);
     io.sockets.in(user.userEmail).emit('newMessage', message);
   })

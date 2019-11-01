@@ -6,11 +6,7 @@ const addUsers = (user) => {
 }
 
 const getUser = (email) => {
-  console.log(users);
-  console.log(email);
-  console.log(users[1].userEmail === email);
  const userDetails = users.filter(user =>  user.userEmail === email );
- console.log(userDetails);
  return userDetails[0];
 } 
 
