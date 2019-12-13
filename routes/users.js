@@ -15,29 +15,38 @@ router.get('/getFriendslist', async(req, res) => {
    
 });
 
-router.get('/getUserDetails', function(req, res, next) {
-  new sql.Request(poolPromise).input('loginId', sql.Numeric, req.query.loginId)
-  .query('select * from Users where id = @loginId', (err, result)=>{
-    if(err) {
-      console.log(err);
-    } else {
-      console.log(result.recordset);
-      res.json(result.recordset[0]);
-    }
-  })
+router.get('/getUserDetails', async(req, res, next) => {
+  console.log(req.query.loginId);
+  try {
+    var data = await service.getUserDetails(req.query);
+    res.json(data);
+  }catch(err) {
+    console.log(err);
+    res.status(404).json(err);
+  }
+  
+   
   
    
 });
 router.post('/saveMessages', async(req,res, next)=>{
     try {
-      console.log(req.body);
       var data = await service.insertMessages(req.body);
       res.json("Saved Messae successfully");
     } catch(err) {
       console.log(err);
       res.status(404).json(err);
     }
-    
-
 })
+
+router.post('/fetchMessages', async(req,res, next)=>{
+  try {
+    var data = await service.getMessages(req.body);
+    res.json(data);
+  } catch(err) {
+    console.log(err);
+    res.status(404).json(err);
+  }
+})
+
 module.exports = router;

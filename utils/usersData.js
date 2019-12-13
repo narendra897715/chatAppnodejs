@@ -5,8 +5,8 @@ const addUsers = (user) => {
   return user;
 }
 
-const getUser = (email) => {
- const userDetails = users.filter(user =>  user.userEmail === email );
+const getUser = (sendToId) => {
+ const userDetails = users.filter(user =>  user.userId === sendToId );
  return userDetails[0];
 } 
 
