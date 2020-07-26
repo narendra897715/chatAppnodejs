@@ -11,26 +11,26 @@ var sql = require("mssql");
 // };
 
 
-// var config = {
-//     user: 'narenpc',
-//     password: 'Software@123',
-//     server: 'USER-PC',
-//     database: 'chatAppdb',
-//     options: {
-//       encrypt: false // Use this if you're on Windows Azure
-//   }
-//   };
+var config = {
+    user: 'narenpc',
+    password: 'Software@12345678',
+    server: 'USER-PC',
+    database: 'chatAppdb',
+    options: {
+      encrypt: false // Use this if you're on Windows Azure
+  }
+  };
 
     // config for your Realpage database
-    var config = {
-      user: 'newLogin',
-      password: 'Keyboard@123456',
-      server: 'RPILMASQL002',
-      database: 'chatAppdb',
-      options: {
-        encrypt: false // Use this if you're on Windows Azure
-    }
-    }; 
+    // var config = {
+    //   user: 'newLogin',
+    //   password: 'Keyboard@123456',
+    //   server: 'RPILMASQL002',
+    //   database: 'chatAppdb',
+    //   options: {
+    //     encrypt: false // Use this if you're on Windows Azure
+    // }
+    // }; 
 
     // config for aws rds database
     //  var config = {
